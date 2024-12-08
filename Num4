@@ -1,0 +1,300 @@
+{
+  "log": {
+    "level": "warn",
+    "output": "box.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-remote",
+        "address": "udp://1.1.1.1",
+        "address_resolver": "dns-direct"
+      },
+      {
+        "tag": "dns-trick-direct",
+        "address": "https://sky.rethinkdns.com/",
+        "detour": "direct-fragment"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "1.1.1.1",
+        "address_resolver": "dns-local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain": [
+          "hkcft01.xqc.best",
+          "jpcft01.xqc.best",
+          "sgcft01.xqc.best"
+        ],
+        "server": "dns-direct"
+      },
+      {
+        "domain": "connectivitycheck.gstatic.com",
+        "server": "dns-remote",
+        "rewrite_ttl": 3000
+      },
+      {
+        "domain_suffix": ".ir",
+        "server": "dns-direct"
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "server": "dns-direct"
+      }
+    ],
+    "final": "dns-remote",
+    "static_ips": {
+      "sky.rethinkdns.com": [
+        "104.17.147.22",
+        "104.17.148.22",
+        "2a06:98c1:3123::",
+        "2a06:98c1:3122::",
+        "188.114.99.0",
+        "188.114.98.0"
+      ]
+    },
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 9000,
+      "inet4_address": "172.19.0.1/28",
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": true,
+      "stack": "mixed",
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 12334,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "listen_port": 16450
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "公益机场 xqc.best",
+        "🇭🇰 HK | 香港 LB",
+        "🇯🇵 JP | 日本 LB",
+        "🇸🇬 SG | 新加坡 LB"
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "公益机场 xqc.best",
+        "🇭🇰 HK | 香港 LB",
+        "🇯🇵 JP | 日本 LB",
+        "🇸🇬 SG | 新加坡 LB"
+      ],
+      "url": "http://connectivitycheck.gstatic.com/generate_204",
+      "interval": "10m0s",
+      "tolerance": 1,
+      "idle_timeout": "30m0s"
+    },
+    {
+      "type": "vmess",
+      "tag": "公益机场 xqc.best",
+      "server": "hkcft01.xqc.best",
+      "server_port": 443,
+      "uuid": "4f268ce5-882c-4145-9ba4-0809d1120596",
+      "security": "auto",
+      "tls": {
+        "enabled": true,
+        "server_name": "d1th2ch215a6xr.cloudfront.net"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/stream",
+        "headers": {
+          "Host": "d1th2ch215a6xr.cloudfront.net"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰 HK | 香港 LB",
+      "server": "hkcft01.xqc.best",
+      "server_port": 443,
+      "uuid": "4f268ce5-882c-4145-9ba4-0809d1120596",
+      "security": "auto",
+      "tls": {
+        "enabled": true,
+        "server_name": "d1th2ch215a6xr.cloudfront.net"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/stream?ed=2048",
+        "headers": {
+          "Host": "d1th2ch215a6xr.cloudfront.net"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇯🇵 JP | 日本 LB",
+      "server": "jpcft01.xqc.best",
+      "server_port": 443,
+      "uuid": "4f268ce5-882c-4145-9ba4-0809d1120596",
+      "security": "auto",
+      "tls": {
+        "enabled": true,
+        "server_name": "d17ttua58dfmz.cloudfront.net"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/stream",
+        "headers": {
+          "Host": "d17ttua58dfmz.cloudfront.net"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇸🇬 SG | 新加坡 LB",
+      "server": "sgcft01.xqc.best",
+      "server_port": 443,
+      "uuid": "4f268ce5-882c-4145-9ba4-0809d1120596",
+      "security": "auto",
+      "tls": {
+        "enabled": true,
+        "server_name": "d16henb377mok4.cloudfront.net"
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/stream",
+        "headers": {
+          "Host": "d16henb377mok4.cloudfront.net"
+        },
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "direct",
+      "tag": "direct-fragment",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "2-8"
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "bypass"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "inbound": "dns-in",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "process_name": [
+          "Hiddify",
+          "Hiddify.exe",
+          "HiddifyCli",
+          "HiddifyCli.exe"
+        ],
+        "outbound": "bypass"
+      },
+      {
+        "domain_suffix": ".ir",
+        "outbound": "direct"
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "outbound": "direct"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geoip-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geoip-ir.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geosite-ir.srs",
+        "update_interval": "120h0m0s"
+      }
+    ],
+    "final": "select",
+    "auto_detect_interface": true,
+    "override_android_vpn": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "clash.db"
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:16756",
+      "secret": "hIRMhXOtxX58wa42"
+    }
+  }
+}
