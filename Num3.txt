@@ -97,7 +97,7 @@
       "tag": "select",
       "outbounds": [
         "auto",
-        "hex § 0",
+     
         "WoW § 1"
       ],
       "default": "auto"
