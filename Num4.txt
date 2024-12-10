@@ -1,7 +1,6 @@
 {
   "log": {
     "level": "warn",
-    "output": "box.log",
     "timestamp": true
   },
   "dns": {
@@ -34,7 +33,7 @@
     ],
     "rules": [
       {
-        "domain": "connectivitycheck.gstatic.com",
+        "domain": "cp.cloudflare.com",
         "server": "dns-remote",
         "rewrite_ttl": 3000
       },
@@ -53,12 +52,12 @@
     "final": "dns-remote",
     "static_ips": {
       "sky.rethinkdns.com": [
-        "104.17.148.22",
         "104.17.147.22",
+        "104.17.148.22",
         "2a06:98c1:3123::",
         "2a06:98c1:3122::",
-        "188.114.99.0",
-        "188.114.98.0"
+        "188.114.98.0",
+        "188.114.99.0"
       ]
     },
     "independent_cache": true
@@ -69,13 +68,11 @@
       "tag": "tun-in",
       "mtu": 9000,
       "inet4_address": "172.19.0.1/28",
-      "inet6_address": "fdfe:dcba:9876::1/126",
       "auto_route": true,
       "endpoint_independent_nat": true,
-      "stack": "mixed",
+      "stack": "gvisor",
       "sniff": true,
-      "sniff_override_destination": true,
-      "domain_strategy": "prefer_ipv4"
+      "domain_strategy": "ipv4_only"
     },
     {
       "type": "mixed",
@@ -84,7 +81,7 @@
       "listen_port": 12334,
       "sniff": true,
       "sniff_override_destination": true,
-      "domain_strategy": "prefer_ipv4"
+      "domain_strategy": "ipv4_only"
     },
     {
       "type": "direct",
@@ -99,55 +96,57 @@
       "tag": "select",
       "outbounds": [
         "auto",
-        "m4 § 0",
+        "hex § 0",
         "WoW § 1"
       ],
-      "default": "auto"
+      "default": "auto",
+      "interrupt_exist_connections": true
     },
     {
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        "m4 § 0",
+        "hex § 0",
         "WoW § 1"
       ],
-      "url": "http://connectivitycheck.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com",
       "interval": "10m0s",
       "tolerance": 1,
-      "idle_timeout": "30m0s"
+      "idle_timeout": "30m0s",
+      "interrupt_exist_connections": true
     },
     {
       "type": "wireguard",
-      "tag": "m4 § 0",
+      "tag": "hex § 0",
       "local_address": [
         "172.16.0.2/24",
-        "2606:4700:110:8fe4:f0d5:aa64:d49a:88f2/128"
+        "2606:4700:110:8a65:5980:f4ef:36dd:312f/128"
       ],
-      "private_key": "iBsqot0vcX4RWDA/aiU+fYzqmfUFtUv6k9yYOnau7Wo=",
-      "server": "162.159.192.206",
-      "server_port": 903,
+      "private_key": "WNJDrX0AIw9Qiijs8be6D64b8x5CsH+VXdmVrPJ291U=",
+      "server": "162.159.192.99",
+      "server_port": 878,
       "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-      "reserved": "X0UQ",
+      "reserved": "b5gi",
       "mtu": 1330,
       "fake_packets": "1-3",
       "fake_packets_size": "10-20",
       "fake_packets_delay": "5-10",
-      "fake_packets_mode": "m4"
+      "fake_packets_mode": "h_30"
     },
     {
       "type": "wireguard",
       "tag": "WoW § 1",
-      "detour": "m4 § 0",
+      "detour": "hex § 0",
       "local_address": [
         "172.16.0.2/24",
         "2606:4700:110:84da:b398:bf68:7606:5a21/128"
       ],
       "private_key": "0MdxBmQU+Sxwjdx9YA3oGvkSdIamVKDEr9fghSUigFo=",
-      "server": "162.159.192.206",
-      "server_port": 500,
+      "server": "162.159.192.129",
+      "server_port": 1180,
       "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
       "reserved": "E5AR",
-      "mtu": 1280
+      "mtu": 1330
     },
     {
       "type": "dns",
@@ -178,32 +177,17 @@
   "route": {
     "rules": [
       {
+        "inbound": "tun-in",
+        "package_name": "app.hiddify.com",
+        "outbound": "bypass"
+      },
+      {
         "inbound": "dns-in",
         "outbound": "dns-out"
       },
       {
         "port": 53,
         "outbound": "dns-out"
-      },
-      {
-        "process_name": [
-          "Hiddify",
-          "Hiddify.exe",
-          "HiddifyCli",
-          "HiddifyCli.exe"
-        ],
-        "outbound": "bypass"
-      },
-      {
-        "rule_set": [
-          "geosite-ads",
-          "geosite-malware",
-          "geosite-phishing",
-          "geosite-cryptominers",
-          "geoip-malware",
-          "geoip-phishing"
-        ],
-        "outbound": "block"
       },
       {
         "domain_suffix": ".ir",
@@ -218,48 +202,6 @@
       }
     ],
     "rule_set": [
-      {
-        "type": "remote",
-        "tag": "geosite-ads",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-category-ads-all.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-malware",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-malware.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-phishing",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-phishing.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-cryptominers",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-cryptominers.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geoip-phishing",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geoip-phishing.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geoip-malware",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geoip-malware.srs",
-        "update_interval": "120h0m0s"
-      },
       {
         "type": "remote",
         "tag": "geoip-ir",
@@ -286,7 +228,7 @@
     },
     "clash_api": {
       "external_controller": "127.0.0.1:16756",
-      "secret": "348z7_TcimM-YKcY"
+      "secret": "wLdhG2bk-1MuydA0"
     }
   }
 }
