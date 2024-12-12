@@ -4,5 +4,4 @@
 //support-url: https://t.me/BXAMbot
 //profile-web-page-url: https://github.com/4n0nymou3
 
-
 warp://[2606:4700:d0::a2d1:47c2:2e69:5e6d]:7152?ifp=10-20&ifps=20-60&ifp=5-10#Iran&&detour=warp://162.159.192.221:3138?ifp=10-20&ifps=20-60&ifp=5-10#Germany
