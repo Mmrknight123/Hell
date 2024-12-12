@@ -4,7 +4,7 @@
 //support-url: https://t.me/BXAMbot
 //profile-web-page-url: https://github.com/4n0nymou3
 
-warp://O3c1s2u0-63Ddp2J4-57TS4RD2@[2606:4700:d0::1d50:f025:2791:a629]:3476?ifp=1-3&ifps=10-20&ifpd=5-10&ifpm=m42#m4&&detour=warp://p2@162.159.192.195:7156#WoW2
+warp://O3c1s2u0-63Ddp2J4-57TS4RD2@[2606:4700:d0::1d50:f025:2791:a629]:3476?ifp=1-3&ifps=10-20&ifpd=5-10&ifpm=m4#m42&&detour=warp://p2@162.159.192.195:7156#WoW2
 
 warp://188.114.97.14:928/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4&&detour=warp://188.114.97.14:928/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4#Irancellll2-Wow-IPv
 
