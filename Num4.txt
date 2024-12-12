@@ -7,3 +7,5 @@
 warp://[2606:4700:d0::a2d1:47c2:2e69:5e6d]:7152?ifp=10-20&ifps=20-60&ifp=5-10#Iran&&detour=warp://162.159.192.221:3138?ifp=10-20&ifps=20-60&ifp=5-10#Germany
 
 warp://162.159.192.146:2506?ifp=10-20&ifps=20-60&ifp=5-10#Iran2&&detour=warp://162.159.192.146:2506?ifp=10-20&ifps=20-60&ifp=5-10#irancell
+
+warp://[2606:4700:d1::3a6e:ec52:8892:7e86]:1387/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4&&detour=warp://[2606:4700:d1::3a6e:ec52:8892:7e86]:1387/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4#Mciiii-WoW-IPv6🇩🇪
