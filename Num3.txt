@@ -4,4 +4,3 @@
 
 warp://6R79V1za-5QD2ZJ63-jVuX2763@[2606:4700:d0::7dc6:f559:d4cb:3dd5]:4177?ifp=10-20&ifps=20-60&ifp=5-10#Iran&&detour=warp://162.159.195.246:939?ifp=10-20&ifps=20-60&ifp=5-10#Germany
 
-warp://6R79V1za-5QD2ZJ63-jVuX2763@162.159.192.130:2408?ifp=10-20&ifps=20-60&ifp=5-10#irancell&&detour=warp://162.159.192.130:2408?ifp=10-20&ifps=20-60&ifp=5-10#Germanyirancell
