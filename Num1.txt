@@ -14,7 +14,7 @@
       "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
       "reserved": [136, 108, 102],
       "mtu": 1330,
-      "fake_packets_mode": "m4"
+      
     }
   ]
 }
