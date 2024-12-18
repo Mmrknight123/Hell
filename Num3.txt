@@ -4,4 +4,4 @@
 
 warp://188.114.96.203:8319/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4&&detour=warp://188.114.96.203:8319/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4#ایرانسل-WoW-IPv4🇩🇪
 
-warp://0648ZUOk-6t1c7Fl5-qO4Gt805@[2606:4700:d0::2e0a:3ece:9835:7f7b]:2371?ifp=10-20&ifps=20-60&ifp=5-10#Iran&&detour=warp://188.114.97.37:942?ifp=10-20&ifps=20-60&ifp=5-10#Germany2
+warp://0648ZUOk-6t1c7Fl5-qO4Gt805@[2606:4700:d0::2e0a:3ece:9835:7f7b]:2371?ifp=10-20&ifps=20-60&ifp=5-10#Iran&&detour=warp://188.114.97.37:942?ifp=10-20&ifps=20-60&ifp=5-10#Germanye
