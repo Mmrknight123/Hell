@@ -1,7 +1,6 @@
 //profile-title: huhh
 //profile-update-interval: 1
 //subscription-userinfo: upload=0; download=0; total=10737418240000000; expire=2546249531
-//support-url: https://t.me/BXAMbot
 //profile-web-page-url: https://github.com/4n0nymou3
 
 warp://188.114.97.14:928/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4&&detour=warp://188.114.97.14:928/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4#Irancellll2-Wow-IPv4
