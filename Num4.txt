@@ -10,4 +10,4 @@ warp://p1@188.114.96.198:943?ifp=1-3&ifps=10-20&ifpd=5-10&ifpm=m4#m4&&detour=war
 
 warp://[2606:4700:d1::3a6e:ec52:8892:7e86]:1387/?ifp=50-100&ifps=50-100&ifpd=3-6&ifpm=m4#Mciiiii
 
-warp://p1@[2606:4700:d0::167b:3b9:e7e4:2a0f]:1180?ifp=1-3&ifps=10-20&ifpd=5-10&ifpm=m4#m4&&detour=warp://p2@188.114.96.84:7156#WoW
+warp://zgdk2165-ArJ8o453-4nC9o1s6@[2606:4700:d0::1215:a2ef:e9e9:375d]:1180?ifp=1-3&ifps=10-20&ifpd=5-10&ifpm=h_30#hex&&detour=warp://p2@162.159.192.111:968#WoW
